@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "Menjalankan bot..."
-python3 main.py
+python3 -m bot.main
