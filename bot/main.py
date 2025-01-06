@@ -1,7 +1,7 @@
 from pyrogram import Client
-from bot.modules import tag_module  # Import modul tag
-from start import start_message     # Import handler start message
-from config import API_ID, API_HASH, BOT_TOKEN  # Import konfigurasi
+from bot.modules import tag_module
+from start import start_message
+from config import API_ID, API_HASH, BOT_TOKEN
 
 def run_bot():
     app = Client(
@@ -11,13 +11,19 @@ def run_bot():
         bot_token=BOT_TOKEN
     )
 
-    # Tambahkan handler
-    app.add_handler(start_message)               # Handler untuk perintah /start
-    app.add_handler(tag_module.tag_admins)       # Handler untuk mention admin
-    app.add_handler(tag_module.tag_all)          # Handler untuk mention semua anggota
-    app.add_handler(tag_module.stop_tag_all)     # Handler untuk menghentikan mention
+    @app.on_message(filters.command("ping"))
+    async def ping_handler(client, message):
+        await message.reply("Pong!")
 
-    # Jalankan bot
+    print("Menghubungkan ke Telegram...")
+    try:
+        app.start()
+        print("Bot berhasil terhubung!")
+        app.stop()
+    except Exception as e:
+        print(f"Error saat menghubungkan: {e}")
+        return
+
     print("Bot berjalan...")
     app.run()
 
