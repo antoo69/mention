@@ -1,4 +1,4 @@
-from pyrogram import Client
+from pyrogram import Client, filters
 from bot.modules import tag_module
 from start import start_message
 from config import API_ID, API_HASH, BOT_TOKEN
